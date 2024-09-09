@@ -1,4 +1,7 @@
-/*#include <bits/stdc++.h>
+/*  //Coin Change Problem using Recursion 
+
+
+#include <bits/stdc++.h>
 using namespace std;
 #define TC int t; cin>>t;while(t--)
 #define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
@@ -51,7 +54,9 @@ int main() {
   return 0;
 }
 
-*/
+////////////////////////////////////////////////////////////////
+
+// >> Coin Change Problem using 2D array
 
 
 #include <bits/stdc++.h>
@@ -97,6 +102,50 @@ int main() {
     }cout << endl;
   }
 
+
+
+  
+  
+  return 0;
+}
+
+*/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+
+int main() {
+  fast;
+  int noCoin,amount;
+  cin >> noCoin >> amount;
+
+  std::vector<int> coins(noCoin);
+
+  for(int &i: coins) cin >> i;
+
+  int way[noCoin+1][amount+1];
+
+  for(int i=0 ; i<=noCoin; i++){
+    for(int j=0 ; j<=amount; j++){
+      if(i==0) {       
+        way[i][j] = INT_MAX;
+         if(j==0) way[i][j] = 0;
+      }else if(coins[i-1] > j){
+        way[i][j] = way[i-1][j];
+      }else{
+        way[i][j] = min(way[i-1][j] + 0ll,way[i][j-coins[i-1]]+1ll);
+      }
+    }
+  }
+
+  for(int i=0 ; i<=noCoin; i++){
+    for(int j=0 ; j<=amount ; j++){
+      cout << way[i][j] << ' ';
+    }cout << endl;
+  }
 
 
   
